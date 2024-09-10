@@ -1,0 +1,8 @@
+2024/09/10-16:56:03.106 a46c Recovering log #136
+2024/09/10-16:56:03.111 a46c Delete type=0 #136
+2024/09/10-16:56:03.111 a46c Delete type=3 #135
+2024/09/10-17:04:12.663 ac6c Level-0 table #140: started
+2024/09/10-17:04:12.663 ac6c Level-0 table #140: 0 bytes OK
+2024/09/10-17:04:12.667 ac6c Delete type=0 #138
+2024/09/10-17:04:12.684 ac6c Manual compaction at level-0 from '!journal!Ox6M8qn4aFXLyj1b' @ 72057594037927935 : 1 .. '!journal.pages!Ox6M8qn4aFXLyj1b.no4Ilfm1uxDzfiDG' @ 0 : 0; will stop at (end)
+2024/09/10-17:04:12.693 ac6c Manual compaction at level-1 from '!journal!Ox6M8qn4aFXLyj1b' @ 72057594037927935 : 1 .. '!journal.pages!Ox6M8qn4aFXLyj1b.no4Ilfm1uxDzfiDG' @ 0 : 0; will stop at (end)

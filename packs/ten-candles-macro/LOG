@@ -1,0 +1,8 @@
+2024/09/10-16:56:03.087 a46c Recovering log #147
+2024/09/10-16:56:03.095 a46c Delete type=0 #147
+2024/09/10-16:56:03.095 a46c Delete type=3 #146
+2024/09/10-17:04:12.645 ac6c Level-0 table #151: started
+2024/09/10-17:04:12.645 ac6c Level-0 table #151: 0 bytes OK
+2024/09/10-17:04:12.647 ac6c Delete type=0 #149
+2024/09/10-17:04:12.656 ac6c Manual compaction at level-0 from '!folders!LIqFEXeznxv3WGPZ' @ 72057594037927935 : 1 .. '!macros!vUXHN1Wgmjcq9ki9' @ 0 : 0; will stop at (end)
+2024/09/10-17:04:12.661 ac6c Manual compaction at level-1 from '!folders!LIqFEXeznxv3WGPZ' @ 72057594037927935 : 1 .. '!macros!vUXHN1Wgmjcq9ki9' @ 0 : 0; will stop at (end)
