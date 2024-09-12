@@ -1,5 +1,5 @@
 // Import TypeScript modules
-import { registerSettings } from './module/settings';
+import { registerSettings } from './lib/settings';
 import { TenCandles } from './lib/TenCandles';
 
 /* ------------------------------------ */
