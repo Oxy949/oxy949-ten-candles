@@ -1,11 +1,23 @@
 {
   "id": "oxy949-ten-candles",
   "title": "Ten Candles",
-  "version": "1.0.1",
+  "version": "#{VERSION}#",
+  "url": "#{URL}#",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#",
   "compatibility": {
     "minimum": "12",
     "verified": "12"
   },
+  "esmodules": [
+      "scripts/module.js"
+  ],
+  "scripts": [
+      "scripts/lib/lib.js"
+  ],
+  "styles": [
+      "styles/module.css"
+  ],
   "description": "Ten Candles is a zero-prep tabletop storytelling game designed for one-shot 2-4 hour sessions of tragic horror. It is best played with one GM and 3-5 players, by the light of ten tea light candles which provide atmosphere, act as a countdown timer for the game, and allow you to literally burn your character sheet away as you play.",
   "authors": [
     {
