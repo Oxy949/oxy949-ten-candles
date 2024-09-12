@@ -23,7 +23,8 @@ let operations;
 Hooks.once('setup', function () {
     // Do anything after initialization but before ready
       operations = {
-        test: TenCandles.test
+        startTimer: TenCandles.startTimer,
+        checkTimer: TenCandles.checkTimer
       };
 
       //@ts-ignore
