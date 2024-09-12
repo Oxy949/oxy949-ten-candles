@@ -1,6 +1,6 @@
 // Import TypeScript modules
-import { registerSettings } from './lib/settings';
-import { TenCandles } from './lib/TenCandles';
+import { registerSettings } from './lib/settings.ts';
+import { TenCandles } from './lib/TenCandles.ts';
 
 /* ------------------------------------ */
 /* Initialize module					*/
