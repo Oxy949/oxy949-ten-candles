@@ -35,7 +35,10 @@ export class TenCandles {
 
   static interact(args) {
     // Получение настроек путей к аудиофайлам
-    const audioPaths = game.settings.get('oxy949-ten-candles', 'audioPaths');
+    const audioPathBurnPaper = game.settings.get('oxy949-ten-candles', 'audioPathBurnPaper');
+    const audioPathCandleLight = game.settings.get('oxy949-ten-candles', 'audioPathCandleLight');
+    const audioPathCandleBlow = game.settings.get('oxy949-ten-candles', 'audioPathCandleBlow');
+
     // Получение массивов свечей и чаши из настроек модуля
     const candles = game.settings.get('oxy949-ten-candles', 'candlesArray');
     const bowl = game.settings.get('oxy949-ten-candles', 'bowlArray');
@@ -66,10 +69,10 @@ export class TenCandles {
     
         // Воспроизведение звука для чаши и свечей
         if (isBowl) {
-          playAudio(audioPaths.burnPaper, 1.0);
+          playAudio(audioPathBurnPaper, 1.0);
         } else {
           const randomPitch = Math.random() * (1.0 - 0.5) + 0.5;
-          playAudio(audioPaths.candleLight, randomPitch);
+          playAudio(audioPathCandleLight, randomPitch);
         }
       } else {
         candleCount -= 1;
@@ -77,7 +80,7 @@ export class TenCandles {
         // Воспроизведение звука только для свечей
         if (!isBowl) {
           const randomPitch = Math.random() * (1.0 - 0.5) + 0.5;
-          playAudio(audioPaths.candleBlow, randomPitch);
+          playAudio(audioPathCandleBlow, randomPitch);
         }
       }
     

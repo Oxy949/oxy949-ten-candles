@@ -2,18 +2,35 @@ export const registerSettings = function() {
 	// Register any custom module settings here
 	let modulename = "oxy949-ten-candles";
 
-	game.settings.register(modulename, 'audioPaths', {
-		name: 'Path to Audio',
-		hint: 'Enter the audio file paths for the various sounds of the module.',
+	// Регистрация настроек для каждого аудиофайла с использованием FilePicker
+	game.settings.register(modulename, 'audioPathBurnPaper', {
+		name: 'Path to Bowl burn Audio',
+		hint: 'Enter the audio file path.',
 		scope: 'world',
 		config: true,
-		type: Object,
-		default: {
-		  burnPaper: 'modules/'+modulename+'/assets/sfx/burning-paper.mp3',
-		  candleLight: 'modules/'+modulename+'/assets/sfx/candle-light.mp3',
-		  candleBlow: 'modules'+modulename+'/assets/sfx/candle-blow.mp3'
-		},
-        requiresReload: true
+		type: String,
+		filePicker: 'audio', // Включаем FilePicker для выбора файлов
+		default: 'modules/'+modulename+'/assets/sfx/burning-paper.mp3',
+	});
+
+	game.settings.register(modulename, 'audioPathCandleLight', {
+		name: 'Path to candle on Audio',
+		hint: 'Enter the audio file path.',
+		scope: 'world',
+		config: true,
+		type: String,
+		filePicker: 'audio', // Включаем FilePicker для выбора файлов
+		default: 'modules/'+modulename+'/assets/sfx/candle-light.mp33',
+	});
+
+	game.settings.register(modulename, 'audioPathCandleBlow', {
+		name: 'Path to candle off Audio',
+		hint: 'Enter the audio file path.',
+		scope: 'world',
+		config: true,
+		type: String,
+		filePicker: 'audio', // Включаем FilePicker для выбора файлов
+		default: 'modules/'+modulename+'/assets/sfx/candle-blow.mp3',
 	});
 
 	// Регистрация настройки для массива свечей
