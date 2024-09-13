@@ -3,12 +3,6 @@ export class TenCandles {
   static init() {
 
   }
-    
-  // Получение настроек путей к аудиофайлам
-  static audioPaths = game.settings.get('oxy949-ten-candles', 'audioPaths');
-  // Получение массивов свечей и чаши из настроек модуля
-  static candles = game.settings.get('oxy949-ten-candles', 'candlesArray');
-  static bowl = game.settings.get('oxy949-ten-candles', 'bowlArray');
 
   static startTimer(minBurnTime = 10, maxBurnTime = 30, checkEverySec = 1) {
     // Генерируем случайное время в пределах минимального и максимального времени
@@ -40,6 +34,12 @@ export class TenCandles {
   }
 
   static interact(args) {
+    // Получение настроек путей к аудиофайлам
+    const audioPaths = game.settings.get('oxy949-ten-candles', 'audioPaths');
+    // Получение массивов свечей и чаши из настроек модуля
+    const candles = game.settings.get('oxy949-ten-candles', 'candlesArray');
+    const bowl = game.settings.get('oxy949-ten-candles', 'bowlArray');
+
     // Функция воспроизведения аудио с заданными параметрами
     function playAudio(audioPath, volume = 1.0) {
       AudioHelper.play({
