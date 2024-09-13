@@ -24,7 +24,10 @@ Hooks.once('setup', function () {
     // Do anything after initialization but before ready
       operations = {
         startTimer: TenCandles.startTimer,
-        checkTimer: TenCandles.checkTimer
+        interact: TenCandles.interact,
+        audioPaths: TenCandles.audioPaths,
+        candles: TenCandles.candles,
+        bowl: TenCandles.bowl
       };
 
       //@ts-ignore
