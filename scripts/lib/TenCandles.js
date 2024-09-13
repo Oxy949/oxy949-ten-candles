@@ -30,6 +30,6 @@ export class TenCandles {
     let startTime = Date.now();
 
     // Запускаем таймер
-    abouttime.doIn({ second: checkEverySec }, checkTime, startTime, burnTime, checkEverySec);
+    abouttime.doIn({ second: minBurnTime }, checkTime, startTime, burnTime, checkEverySec);
   }
 }  
