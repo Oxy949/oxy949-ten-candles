@@ -45,7 +45,7 @@ export class TenCandles {
 
     // Функция воспроизведения аудио с заданными параметрами
     function playAudio(audioPath, volume = 1.0) {
-      AudioHelper.play({
+      foundry.audio.AudioHelper.play({
         src: audioPath,
         volume: volume,
         loop: false,

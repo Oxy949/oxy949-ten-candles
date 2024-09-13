@@ -20,7 +20,7 @@ export const registerSettings = function() {
 		config: true,
 		type: String,
 		filePicker: 'audio', // Включаем FilePicker для выбора файлов
-		default: 'modules/'+modulename+'/assets/sfx/candle-light.mp33',
+		default: 'modules/'+modulename+'/assets/sfx/candle-light.mp3',
 	});
 
 	game.settings.register(modulename, 'audioPathCandleBlow', {
