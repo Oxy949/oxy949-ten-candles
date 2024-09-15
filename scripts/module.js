@@ -25,9 +25,7 @@ Hooks.once('setup', function () {
       operations = {
         startTimer: TenCandles.startTimer,
         interact: TenCandles.interact,
-        audioPaths: TenCandles.audioPaths,
-        candles: TenCandles.candles,
-        bowl: TenCandles.bowl
+        isCandleLit: TenCandles.isCandleLit
       };
 
       //@ts-ignore

@@ -1,6 +1,87 @@
+class CandlesSettingsForm extends FormApplication {
+    constructor(...args) {
+        super(...args);
+        this.candlesArray = game.settings.get('oxy949-ten-candles', 'candlesArray');
+    }
+
+    static get defaultOptions() {
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            id: "candles-settings-form",
+            title: "Candles Lights Settings",
+            template: "modules/oxy949-ten-candles/templates/settings-form.html",
+            width: 500,
+            height: "auto",
+            closeOnSubmit: true
+        });
+    }
+
+    getData() {
+        return {
+            candles: this.candlesArray,
+            audioPaths: this.audioSettings
+        };
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        // Обработчик для добавления новой свечи
+        html.find("#add-candle").click(() => {
+            this.candlesArray.push([]);
+            this.render();
+        });
+
+        // Обработчик для удаления свечи
+        html.find(".remove-candle").click(ev => {
+            const index = ev.currentTarget.dataset.index;
+            this.candlesArray.splice(index, 1);
+            this.render();
+        });
+    }
+
+    async _updateObject(event, formData) {
+        // Преобразуем данные формы в нужные форматы
+        const updatedCandlesArray = Object.keys(formData)
+            .filter(key => key.startsWith('candle-'))
+            .map(key => formData[key].split(',').map(id => id.trim()));
+
+        // Сохраняем обновленный массив свечей в настройках модуля
+        await game.settings.set('oxy949-ten-candles', 'candlesArray', updatedCandlesArray);
+
+        // Сохраняем обновленные пути аудио в настройках модуля
+        const audioPaths = {
+            burnPaper: formData["audio-burnPaper"],
+            candleLight: formData["audio-candleLight"],
+            candleBlow: formData["audio-candleBlow"]
+        };
+    }
+}
+
+
 export const registerSettings = function() {
 	// Register any custom module settings here
 	let modulename = "oxy949-ten-candles";
+
+	/*
+	game.settings.registerMenu(modulename, 'candlesMenu', {
+        name: "Candles Lights UUID\'s",
+        label: "Configure candles",
+        hint: "Open the window to configure candle light settings.",
+        icon: "fas fa-candle-holder",
+        type: CandlesSettingsForm,
+        restricted: true
+    });
+	
+	// Регистрация настройки для массива чаши
+	game.settings.register(modulename, 'bowlArray', {
+	  name: 'Bowl Lights UUID\'s',
+	  hint: 'Enter an array of identifiers for the bowl.',
+	  scope: 'world',
+	  config: true,
+	  type: Array,
+	  default: ["TlN6Vd0IbZ4JUXUS", "p8tV1sHQgpnKqYGX", "0SU38BAtAayGA7ID"]
+	});
+	*/
 
 	// Регистрация настроек для каждого аудиофайла с использованием FilePicker
 	game.settings.register(modulename, 'audioPathBurnPaper', {
@@ -33,12 +114,73 @@ export const registerSettings = function() {
 		default: 'modules/'+modulename+'/assets/sfx/candle-blow.mp3',
 	});
 
+	// Минимальное время горения свечи
+	game.settings.register(modulename, 'minCandleBurnTime', {
+		name: 'Minimum Candle Burn Time',
+		hint: 'The minimum time a candle will burn (in seconds).',
+		scope: 'world',    // Настройка для всей игры
+		config: true,      // Отображение в интерфейсе
+		type: Number,      // Тип данных - число
+		default: 3600,       // Значение по умолчанию (например, 60 секунд)
+		range: {
+		  min: 1,
+		  max: 18000,
+		  step: 1
+		}
+	  });
+	
+	  // Максимальное время горения свечи
+	  game.settings.register(modulename, 'maxCandleBurnTime', {
+		name: 'Maximum Candle Burn Time',
+		hint: 'The maximum time a candle will burn (in seconds).',
+		scope: 'world',
+		config: true,
+		type: Number,
+		default: 10800,      // Значение по умолчанию (например, 300 секунд)
+		range: {
+		  min: 1,
+		  max: 18000,
+		  step: 1
+		}
+	  });
+
+	  // Максимальное время горения свечи
+	  game.settings.register(modulename, 'checkCandleExtinguish', {
+		name: 'Candle Randomized Extinguishing Check Time',
+		hint: 'For randomized extinguishing, we check for chance every THIS second.',
+		scope: 'world',
+		config: true,
+		type: Number,
+		default: 60,      // Значение по умолчанию (например, 60 секунд)
+		range: {
+		  min: 1,
+		  max: 1800,
+		  step: 1
+		}
+	  });
+
+	  // Максимальное время горения свечи
+	  game.settings.register(modulename, 'bowlBurnTime', {
+		name: 'Bowl Burn Time',
+		hint: 'The maximum time a bolw will burn (in seconds).',
+		scope: 'world',
+		config: true,
+		type: Number,
+		default: 20,      // Значение по умолчанию (например, 300 секунд)
+		range: {
+		  min: 1,
+		  max: 7200,
+		  step: 1
+		}
+	  });
+
+	/*
 	// Регистрация настройки для массива свечей
 	game.settings.register(modulename, 'candlesArray', {
 		name: 'Candles Lights',
 		hint: 'Enter arrays of lights identifiers for each candle.',
 		scope: 'world',
-		config: true,
+		config: false,
 		type: Array,
 		default: [
 		  ["XUPTh4rT6iM2IH6h", "CbFMbnPk12K7ZPWU"],
@@ -51,18 +193,7 @@ export const registerSettings = function() {
 		  ["5qy3z9XGOqs1C8aN", "WkIZ6io8z8XBiZE5"],
 		  ["XMxZRti0ZH7nM1T8", "KMXOFV1GwHpC2rmg"],
 		  ["ADIgSBglENlsWljJ", "PP6XWuSLiXw3jhOw"]
-		],
-        requiresReload: true
-	  });
-	
-	  // Регистрация настройки для массива чаши
-	  game.settings.register(modulename, 'bowlArray', {
-		name: 'Bowl Lights',
-		hint: 'Enter an array of identifiers for the bowl.',
-		scope: 'world',
-		config: true,
-		type: Array,
-		default: ["TlN6Vd0IbZ4JUXUS", "p8tV1sHQgpnKqYGX", "0SU38BAtAayGA7ID"],
-        requiresReload: true
-	  });
+		]
+	});
+	*/
 }
