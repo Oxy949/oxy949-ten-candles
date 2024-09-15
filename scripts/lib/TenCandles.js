@@ -219,7 +219,7 @@ export class TenCandles {
   static async roll(player, withHope) {
     // Функция выбора случайного сообщения из таблицы
     const getRandomMessageFromTable = async (tableUUID) => {
-      const table = game.tables.get(tableUUID);
+      const table =  game.tables.find(t => t.uuid === tableUUID);
       if (table) {
         const roll = await table.roll();
         return roll.results[0].text; // Получаем текст первого результата
@@ -240,7 +240,7 @@ export class TenCandles {
 
     let successes = 0;
     let failures = 0;
-    let rollMessage = '';
+    let rollMessage = 'Проверка повествования...';
 
     let diceCount = player?diceCountPlayers:diceCountGM;
     let roll = await new Roll(`${diceCount}d6`).evaluate({ async : true });
@@ -266,7 +266,7 @@ export class TenCandles {
     } else {
       rollMessage = player ? await getRandomMessageFromTable(playerFailureTable) : await getRandomMessageFromTable(gmFailureTable);
     }
-    console.log(rollMessage);
+    rollMessage = `<p>` + rollMessage + `</p>`;
 
     if (successes === 0) {
       rollMessage += `<strong>ПРОВАЛ</strong>`;
@@ -282,7 +282,7 @@ export class TenCandles {
     if (player)
       statsMessage += `<br>"1" выпало: <strong>${failures}</strong>`;
 
-    let flavor = `<p>${rollMessage}${statsMessage}</p>`;
+    let flavor = `${rollMessage}${statsMessage}`;
 
     let speaker = ChatMessage.getSpeaker({ actor: game.user.character });
     await roll.toMessage({ rollMode : 'publicroll', flavor, speaker });

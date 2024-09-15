@@ -171,7 +171,7 @@ export const registerSettings = function() {
 		scope: 'world',
 		config: true,
 		type: String,
-		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.EPikqOlVc9kH5W4Z' // Укажи путь по умолчанию
+		default: 'RollTable.EPikqOlVc9kH5W4Z' // Укажи путь по умолчанию
 	  });
 
 	  game.settings.register(modulename, 'playerFailureTableUUID', {
@@ -180,7 +180,7 @@ export const registerSettings = function() {
 		scope: 'world',
 		config: true,
 		type: String,
-		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.QulbF0kweM0fLYeR' // Укажи путь по умолчанию
+		default: 'RollTable.QulbF0kweM0fLYeR' // Укажи путь по умолчанию
 	  });
 
 	  game.settings.register(modulename, 'gmSuccessesTableUUID', {
@@ -189,7 +189,7 @@ export const registerSettings = function() {
 		scope: 'world',
 		config: true,
 		type: String,
-		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.MYGlgDUYhDefkaka' // Укажи путь по умолчанию
+		default: 'RollTable.MYGlgDUYhDefkaka' // Укажи путь по умолчанию
 	  });
 
 	  game.settings.register(modulename, 'gmFailureTableUUID', {
@@ -198,7 +198,7 @@ export const registerSettings = function() {
 		scope: 'world',
 		config: true,
 		type: String,
-		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.rEQuJVcuEaKpZvE5' // Укажи путь по умолчанию
+		default: 'RollTable.rEQuJVcuEaKpZvE5' // Укажи путь по умолчанию
 	  });
 
 	/*
