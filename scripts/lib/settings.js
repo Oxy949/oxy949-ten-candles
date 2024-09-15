@@ -69,7 +69,8 @@ export const registerSettings = function() {
 		config: true,
 		type: String,
 		default: 'modules/'+modulename+'/candlesConfig.json', // Укажи путь по умолчанию
-		filePicker: true // Позволяет выбрать файл через интерфейс Foundry
+		filePicker: true, // Позволяет выбрать файл через интерфейс Foundry
+        requiresReload: true
 	  });
 
 	/*

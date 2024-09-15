@@ -266,8 +266,7 @@ export class TenCandles {
     } else {
       rollMessage = player ? await getRandomMessageFromTable(playerFailureTable) : await getRandomMessageFromTable(gmFailureTable);
     }
-    
-
+    console.log(rollMessage);
 
     if (successes === 0) {
       rollMessage += `<strong>ПРОВАЛ</strong>`;
