@@ -277,7 +277,7 @@ export class TenCandles {
       if (successes === 1)
         rollMessage += `<strong>УСПЕХ</strong>`;
       else {
-        rollMessage += `<strong>УСПЕХ +${successes-1}</strong>`;
+        rollMessage += `<strong>УСПЕХ (${successes})</strong>`;
       }
     }
 
