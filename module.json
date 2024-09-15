@@ -81,6 +81,11 @@
         "id": "ru-ru",
         "type": "module",
         "compatibility": {}
+      },
+      {
+        "id": "foundryvtt-simple-calendar",
+        "type": "module",
+        "compatibility": {}
       }
     ],
     "recommends": [
