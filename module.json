@@ -58,6 +58,16 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "ten-candles-tables",
+      "label": "Ten Candles",
+      "path": "packs/ten-candles-tables",
+      "type": "RollTable",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "relationships": {

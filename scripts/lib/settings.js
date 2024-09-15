@@ -62,6 +62,16 @@ export const registerSettings = function() {
 	// Register any custom module settings here
 	let modulename = "oxy949-ten-candles";
 
+	game.settings.register(modulename, 'candlesConfigPath', {
+		name: "Candles Config File Path",
+		hint: "Specify the path to the JSON file containing candle and bowl UUIDs.",
+		scope: 'world',
+		config: true,
+		type: String,
+		default: 'modules/'+modulename+'/candlesConfig.json', // Укажи путь по умолчанию
+		filePicker: true // Позволяет выбрать файл через интерфейс Foundry
+	  });
+
 	/*
 	game.settings.registerMenu(modulename, 'candlesMenu', {
         name: "Candles Lights UUID\'s",
@@ -121,12 +131,7 @@ export const registerSettings = function() {
 		scope: 'world',    // Настройка для всей игры
 		config: true,      // Отображение в интерфейсе
 		type: Number,      // Тип данных - число
-		default: 3600,       // Значение по умолчанию (например, 60 секунд)
-		range: {
-		  min: 1,
-		  max: 18000,
-		  step: 1
-		}
+		default: 3600       // Значение по умолчанию (например, 60 секунд)
 	  });
 	
 	  // Максимальное время горения свечи
@@ -136,12 +141,7 @@ export const registerSettings = function() {
 		scope: 'world',
 		config: true,
 		type: Number,
-		default: 10800,      // Значение по умолчанию (например, 300 секунд)
-		range: {
-		  min: 1,
-		  max: 18000,
-		  step: 1
-		}
+		default: 10800      // Значение по умолчанию (например, 300 секунд)
 	  });
 
 	  // Максимальное время горения свечи
@@ -151,12 +151,7 @@ export const registerSettings = function() {
 		scope: 'world',
 		config: true,
 		type: Number,
-		default: 60,      // Значение по умолчанию (например, 60 секунд)
-		range: {
-		  min: 1,
-		  max: 1800,
-		  step: 1
-		}
+		default: 60      // Значение по умолчанию (например, 60 секунд)
 	  });
 
 	  // Максимальное время горения свечи
@@ -166,12 +161,43 @@ export const registerSettings = function() {
 		scope: 'world',
 		config: true,
 		type: Number,
-		default: 20,      // Значение по умолчанию (например, 300 секунд)
-		range: {
-		  min: 1,
-		  max: 7200,
-		  step: 1
-		}
+		default: 20      // Значение по умолчанию (например, 300 секунд)
+	  });
+
+	  game.settings.register(modulename, 'playerSuccessesTableUUID', {
+		name: "Player Successes Table UUID",
+		hint: "The UUID of the table used for player successes.",
+		scope: 'world',
+		config: true,
+		type: String,
+		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.EPikqOlVc9kH5W4Z' // Укажи путь по умолчанию
+	  });
+
+	  game.settings.register(modulename, 'playerFailureTableUUID', {
+		name: "Player Failures Table UUID",
+		hint: "The UUID of the table used for player failures.",
+		scope: 'world',
+		config: true,
+		type: String,
+		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.QulbF0kweM0fLYeR' // Укажи путь по умолчанию
+	  });
+
+	  game.settings.register(modulename, 'gmSuccessesTableUUID', {
+		name: "GM Successes Table UUID",
+		hint: "The UUID of the table used for GM successes.",
+		scope: 'world',
+		config: true,
+		type: String,
+		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.MYGlgDUYhDefkaka' // Укажи путь по умолчанию
+	  });
+
+	  game.settings.register(modulename, 'gmFailureTableUUID', {
+		name: "GM Failures Table UUID",
+		hint: "The UUID of the table used for GM failures.",
+		scope: 'world',
+		config: true,
+		type: String,
+		default: 'Compendium.oxy949-ten-candles.ten-candles-tables.RollTable.rEQuJVcuEaKpZvE5' // Укажи путь по умолчанию
 	  });
 
 	/*

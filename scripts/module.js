@@ -25,7 +25,17 @@ Hooks.once('setup', function () {
       operations = {
         startTimer: TenCandles.startTimer,
         interact: TenCandles.interact,
-        isCandleLit: TenCandles.isCandleLit
+        isCandleLit: TenCandles.isCandleLit,
+        countLitCandles: TenCandles.countLitCandles,
+        candlesSceneUUID: TenCandles.candlesSceneUUID,
+        candlesUUIDs: TenCandles.candlesUUIDs,
+        bowlUUIDs: TenCandles.bowlUUIDs,
+        playerDiceCountTextUUID: TenCandles.playerDiceCountTextUUID,
+        gmDiceCountTextUUID: TenCandles.gmDiceCountTextUUID,
+        roll: TenCandles.roll,
+        rollGM: TenCandles.rollGM,
+        rollPlayer: TenCandles.rollPlayer,
+        isCandlesScene: TenCandles.isCandlesScene
       };
 
       //@ts-ignore

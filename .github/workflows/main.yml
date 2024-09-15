@@ -117,6 +117,7 @@ jobs:
              ./module.zip                        \
             `# The files that will be included.` \
             module.json                          \
+            candlesConfig.json                   \
             README.md                            \
             LICENSE                              \
             assets                               \
