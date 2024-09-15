@@ -50,10 +50,8 @@ export class TenCandles {
     function checkTime(candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp) {
       let timeElapsed = (Date.now() - startedTime) / 1000; // Время в секундах
 
-      if (timeElapsed >= burnMinTime && game.candles.isCandlesScene())
+      if (game.candles.isCandlesScene())
       {
-        console.log(`${candleIdTemp} Прошло секунд гарения: ` + timeElapsed);
-
         // Проверяем, потушена ли уже свеча
         if (!game.candles.isCandleLit(candleIdTemp)){
           return; // Прекращаем выполнение дальнейших проверок
@@ -66,19 +64,24 @@ export class TenCandles {
           return; // Прекращаем выполнение дальнейших проверок
         }
 
-        // Рассчитываем вероятность экспоненциального затухания с учетом минимального времени
-        let adjustedTimeElapsed = timeElapsed - burnMinTime; // Время после минимального времени горения
-        let adjustedMaxBurnTime = burnFinalTime - burnMinTime; // Время между минимальным и финальным
-        let timeRatio = adjustedTimeElapsed / adjustedMaxBurnTime; // Нормализованное время от 0 до 1
-        let extinguishChance = 1 - Math.exp(-timeRatio * 3); // Экспоненциальная формула вероятности
         
-        console.log(`Шанс затухания: ${(extinguishChance * 100).toFixed(2)}%`);
+        if (timeElapsed >= burnMinTime) {
+          console.log(`${candleIdTemp} Прошло секунд гарения: ` + timeElapsed);
 
-        // Случайное затухание на основе вычисленного шанса
-        if (Math.random() < extinguishChance) {
-          console.log("Свеча затухла случайно спустя " + timeElapsed.toFixed(2) + " секунд.");
-          game.candles.interact([candleIdTemp], false);
-          return; // Прекращаем выполнение дальнейших проверок
+          // Рассчитываем вероятность экспоненциального затухания с учетом минимального времени
+          let adjustedTimeElapsed = timeElapsed - burnMinTime; // Время после минимального времени горения
+          let adjustedMaxBurnTime = burnFinalTime - burnMinTime; // Время между минимальным и финальным
+          let timeRatio = adjustedTimeElapsed / adjustedMaxBurnTime; // Нормализованное время от 0 до 1
+          let extinguishChance = 1 - Math.exp(-timeRatio * 3); // Экспоненциальная формула вероятности
+          
+          console.log(`Шанс затухания: ${(extinguishChance * 100).toFixed(2)}%`);
+
+          // Случайное затухание на основе вычисленного шанса
+          if (Math.random() < extinguishChance) {
+            console.log("Свеча затухла случайно спустя " + timeElapsed.toFixed(2) + " секунд.");
+            game.candles.interact([candleIdTemp], false);
+            return; // Прекращаем выполнение дальнейших проверок
+          }
         }
       }
 
