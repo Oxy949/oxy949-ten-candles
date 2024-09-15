@@ -1,5 +1,12 @@
 # Ten Candles Setup
-Import the Ten Candles Scene and Macro Compendiums. **Make sure to check "Keep Document IDs?" when importing!!**
+
+## How to install 
+1. Copy `https://github.com/Oxy949/oxy949-ten-candles/releases/latest/download/module.json` 
+2. Paste it in your Foundry VTT, wait for install
+3. Enable the module in your world
+4. Import the Ten Candles `Scene`, `Macro`, `Tables` and (optionally) `Jurnals` Compendiums. **Make sure to check "Keep Document IDs?" when importing!!**
+5. Open main scene. Interact with a candles by click. Use macro to roll and adjust player's dice
+5. Enjoy!
 
 Included in this module is 1 Scene and 3 Macros (2 for the GM, 1 for the players).  The scene emulates the tabletop with candles and a bowl for burning traits. The macros allow control over the candle lights and flame in the bowl, moving dice from the players to the gm pool and reseting the pools when a scene ends, and allows the players to roll all the dice in a conflict (GM dice are included in this).
 
