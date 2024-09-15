@@ -261,9 +261,9 @@ export class TenCandles {
     })
 
     if (successes > 0){
-      rollMessage = isPlayer ? await getRandomMessageFromTable(playerSuccessesTable) : await getRandomMessageFromTable(gmSuccessesTable);
+      rollMessage = player ? await getRandomMessageFromTable(playerSuccessesTable) : await getRandomMessageFromTable(gmSuccessesTable);
     } else {
-      rollMessage = isPlayer ? await getRandomMessageFromTable(playerFailureTable) : await getRandomMessageFromTable(gmFailureTable);
+      rollMessage = player ? await getRandomMessageFromTable(playerFailureTable) : await getRandomMessageFromTable(gmFailureTable);
     }
     
 
