@@ -218,7 +218,8 @@ export class TenCandles {
 
   static async roll(player, withHope) {
     // Функция выбора случайного сообщения из таблицы
-    const getRandomMessageFromTable = async (table) => {
+    const getRandomMessageFromTable = async (tableUUID) => {
+      const table = game.tables.get(tableUUID);
       if (table) {
         const roll = await table.roll();
         return roll.results[0].text; // Получаем текст первого результата
