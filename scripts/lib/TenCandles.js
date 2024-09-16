@@ -85,6 +85,9 @@ export class TenCandles {
         }
       }
 
+      const status = SimpleCalendar.api.clockStatus();
+      if (!status.started && !game.paused)
+        SimpleCalendar.api.startClock();
       // Повторный вызов функции
       abouttime.doIn({ second: checkEverySecTemp }, checkTime, candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp);
     }
@@ -93,6 +96,9 @@ export class TenCandles {
     let startTime = Date.now();
 
     // Запускаем таймер
+    const status = SimpleCalendar.api.clockStatus();
+    if (!status.started && !game.paused)
+      SimpleCalendar.api.startClock();
     abouttime.doIn({ second: checkEverySec }, checkTime, candleId, startTime, minBurnTime, maxBurnTime, checkEverySec);
   }
 
