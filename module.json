@@ -83,6 +83,11 @@
         "compatibility": {}
       },
       {
+        "id": "about-time",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
         "id": "foundryvtt-simple-calendar",
         "type": "module",
         "compatibility": {}
