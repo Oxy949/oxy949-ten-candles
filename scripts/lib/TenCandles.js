@@ -293,7 +293,7 @@ export class TenCandles {
 
     // Добавляем кнопку в сообщение
     let buttonId = `reduce-dice`;
-    if (game.user.isGM && player && failures > 0) {  // Уникальный флаг для каждого сообщения
+    if (player && failures > 0) {  // Уникальный флаг для каждого сообщения
       statsMessage += `<button id="${buttonId}" data-failures="${failures}" style="margin-top: 10px; margin-bottom: 10px;">Убрать все "1" (${failures} шт.) из пула игроков</button>`;
   }
 

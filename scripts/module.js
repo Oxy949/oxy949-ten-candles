@@ -74,5 +74,8 @@ Hooks.on("renderChatMessage", function (message, html, data) {
     }else{
       html.find(`button#reduce-dice`).hide();  // Скрываем кнопку
     }
+  }else{
+    html.find(`button#reduce-dice`).hide();  // Скрываем кнопку
   }
+  
 });
