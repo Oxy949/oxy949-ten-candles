@@ -275,15 +275,15 @@ export class TenCandles {
     } else {
       rollMessage = player ? await getRandomMessageFromTable(playerFailureTable) : await getRandomMessageFromTable(gmFailureTable);
     }
-    rollMessage = `<p>` + rollMessage + `</p>`;
 
+    rollMessage += "<p>";
     if (successes === 0) {
-      rollMessage += `<strong>ПРОВАЛ</strong>`;
+      rollMessage += `<strong style="font-size: large;">ПРОВАЛ</strong>`;
     } else {
       if (successes === 1)
-        rollMessage += `<strong>УСПЕХ</strong>`;
+        rollMessage += `<strong style="font-size: large;">УСПЕХ</strong>`;
       else {
-        rollMessage += `<strong>УСПЕХ (${successes})</strong>`;
+        rollMessage += `<strong style="font-size: large;">УСПЕХ (${successes})</strong>`;
       }
     }
 
@@ -291,7 +291,7 @@ export class TenCandles {
     if (player)
       statsMessage += `<br>"1" выпало: <strong>${failures}</strong>`;
 
-    let flavor = `${rollMessage}${statsMessage}`;
+    let flavor = `${rollMessage}${statsMessage}</p>`;
 
     let speaker = ChatMessage.getSpeaker({ actor: game.user.character });
     await roll.toMessage({ rollMode : 'publicroll', flavor, speaker });
