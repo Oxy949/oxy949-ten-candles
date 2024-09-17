@@ -251,50 +251,56 @@ export class TenCandles {
     let failures = 0;
     let rollMessage = 'Проверка повествования...';
 
-    let diceCount = player?diceCountPlayers:diceCountGM;
-    let roll = await new Roll(`${diceCount}d6`).evaluate({ async : true });
+    let diceCount = player ? diceCountPlayers : diceCountGM;
+    let roll = await new Roll(`${diceCount}d6`).evaluate({ async: true });
 
     if (player && withHope) {
         console.log('Rolling Hope');
-        let rollHope = await new Roll('1d6').evaluate({ async : true });
+        let rollHope = await new Roll('1d6').evaluate({ async: true });
         if (rollHope.terms[0].results[0].result >= 5) {
-          successes+=1;
+            successes += 1;
         }
 
         let speaker = ChatMessage.getSpeaker({ actor: game.user.character });
-        await rollHope.toMessage({ rollMode : 'publicroll', flavor: 'Кость Надежды:', speaker});
+        await rollHope.toMessage({ rollMode: 'publicroll', flavor: 'Кость Надежды:', speaker });
     }
 
     roll.terms[0].results.forEach(r => {
-      if (r.result === 1) { failures+=1 }
-      if (r.result === 6) { successes+=1 }
-    })
+        if (r.result === 1) { failures += 1 }
+        if (r.result === 6) { successes += 1 }
+    });
 
-    if (successes > 0){
-      rollMessage = player ? await getRandomMessageFromTable(playerSuccessesTable) : await getRandomMessageFromTable(gmSuccessesTable);
+    if (successes > 0) {
+        rollMessage = player ? await getRandomMessageFromTable(playerSuccessesTable) : await getRandomMessageFromTable(gmSuccessesTable);
     } else {
-      rollMessage = player ? await getRandomMessageFromTable(playerFailureTable) : await getRandomMessageFromTable(gmFailureTable);
+        rollMessage = player ? await getRandomMessageFromTable(playerFailureTable) : await getRandomMessageFromTable(gmFailureTable);
     }
 
     rollMessage += "<p>";
     if (successes === 0) {
-      rollMessage += `<strong style="font-size: large;">ПРОВАЛ</strong>`;
+        rollMessage += `<strong style="font-size: large;">ПРОВАЛ</strong>`;
     } else {
-      if (successes === 1)
-        rollMessage += `<strong style="font-size: large;">УСПЕХ</strong>`;
-      else {
-        rollMessage += `<strong style="font-size: large;">УСПЕХ (${successes})</strong>`;
-      }
+        if (successes === 1)
+            rollMessage += `<strong style="font-size: large;">УСПЕХ</strong>`;
+        else {
+            rollMessage += `<strong style="font-size: large;">УСПЕХ (${successes})</strong>`;
+        }
     }
 
     let statsMessage = ``;
     if (player)
-      statsMessage += `<br>"1" выпало: <strong>${failures}</strong>`;
+        statsMessage += `<br>"1" выпало: <strong>${failures}</strong>`;
+
+    // Добавляем кнопку в сообщение
+    let buttonId = `reduce-dice`;
+    if (game.user.isGM && player && failures > 0) {  // Уникальный флаг для каждого сообщения
+      statsMessage += `<button id="${buttonId}" data-failures="${failures}" style="margin-top: 10px; margin-bottom: 10px;">Убрать все "1" (${failures} шт.) из пула игроков</button>`;
+  }
 
     let flavor = `${rollMessage}${statsMessage}</p>`;
 
     let speaker = ChatMessage.getSpeaker({ actor: game.user.character });
-    await roll.toMessage({ rollMode : 'publicroll', flavor, speaker });
+    let chatMessage = await roll.toMessage({ rollMode: 'publicroll', flavor, speaker });
   }
 
   static async rollGM() {
@@ -303,5 +309,32 @@ export class TenCandles {
 
   static async rollPlayer(withHope) {
     await game.candles.roll(true, withHope);
+  }
+
+  static async removePlayerDice(count = 1) {
+    let playerDiceCountId = game.candles.playerDiceCountTextUUID;
+    let gmDiceCountId = game.candles.gmDiceCountTextUUID;
+
+    let playerDiceCountDrawing = canvas.drawings.placeables[canvas.drawings.placeables.findIndex(drawing => drawing.id === playerDiceCountId)];
+    let playerDiceCount = parseInt(playerDiceCountDrawing.document.text);
+    let gmDiceCountDrawing = canvas.drawings.placeables[canvas.drawings.placeables.findIndex(drawing => drawing.id === gmDiceCountId)];
+    let gmDiceCount = parseInt(gmDiceCountDrawing.document.text);
+    canvas.drawings.updateAll({text: playerDiceCount-count}, (drawing => (drawing.id === playerDiceCountId)));
+    canvas.drawings.updateAll({text: gmDiceCount+count}, (drawing => (drawing.id === gmDiceCountId)));
+  }
+  
+  static async resetPlayerDice() {
+    let playerDiceCountId = game.candles.playerDiceCountTextUUID;
+    let gmDiceCountId = game.candles.gmDiceCountTextUUID;
+
+    let playerDiceCountDrawing = canvas.drawings.placeables[canvas.drawings.placeables.findIndex(drawing => drawing.id === playerDiceCountId)];
+    let playerDiceCount = parseInt(playerDiceCountDrawing.document.text);
+    let gmDiceCountDrawing = canvas.drawings.placeables[canvas.drawings.placeables.findIndex(drawing => drawing.id === gmDiceCountId)];
+    let gmDiceCount = parseInt(gmDiceCountDrawing.document.text);
+
+    let candleCount = parseInt(game.candles.countLitCandles());
+
+    canvas.drawings.updateAll({text: candleCount}, (drawing => (drawing.id === playerDiceCountId)));
+    canvas.drawings.updateAll({text: (10-candleCount)}, (drawing => (drawing.id === gmDiceCountId)));
   }
 }  

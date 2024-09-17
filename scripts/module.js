@@ -35,7 +35,9 @@ Hooks.once('setup', function () {
         roll: TenCandles.roll,
         rollGM: TenCandles.rollGM,
         rollPlayer: TenCandles.rollPlayer,
-        isCandlesScene: TenCandles.isCandlesScene
+        isCandlesScene: TenCandles.isCandlesScene,
+        removePlayerDice: TenCandles.removePlayerDice,
+        resetPlayerDice: TenCandles.resetPlayerDice
       };
 
       //@ts-ignore
@@ -57,3 +59,20 @@ Hooks.once('ready', function () {
     // Do this until simple calendar is ready early
 });
 
+Hooks.on("renderChatMessage", function (message, html, data) {
+  // Check if the message is a roll
+  if (message.isRoll && game.user.isGM) {
+    if (!message.getFlag('oxy949-ten-candles', `clicked-${message.id}`)) {
+        html.find(`button#reduce-dice`).click(async () => {
+            
+            const failuresValue = html.find(`button#reduce-dice`).data('failures');
+            game.candles.removePlayerDice(failuresValue)
+
+            html.find(`button#reduce-dice`).hide();  // Скрываем кнопку
+            await message.setFlag('oxy949-ten-candles', `clicked-${message.id}`, true);  // Уникальный флаг для конкретного сообщения
+        });
+    }else{
+      html.find(`button#reduce-dice`).hide();  // Скрываем кнопку
+    }
+  }
+});
