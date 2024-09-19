@@ -35,6 +35,13 @@ export class TenCandles {
       this.gmDiceCountTextUUID = data.gmDiceCountTextUUID;
       this.candlesSceneUUID = data.candlesSceneUUID;
 
+      // Обновляем массивы UUID
+      game.candles.candlesUUIDs = this.candlesUUIDs;
+      game.candles.bowlUUIDs = this.bowlUUIDs;
+      game.candles.playerDiceCountTextUUID = this.playerDiceCountTextUUID;
+      game.candles.gmDiceCountTextUUID = this.gmDiceCountTextUUID;
+      game.candles.candlesSceneUUID = this.candlesSceneUUID;
+
     } catch (error) {
       console.error("Ошибка при загрузке файла JSON:", error);
     }
