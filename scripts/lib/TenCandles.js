@@ -256,8 +256,8 @@ export class TenCandles {
 
     if (player && withHope) {
         console.log('Rolling Hope');
-        let rollHope = await new Roll('1d6').evaluate({ async: true });
-        if (rollHope.terms[0].results[0].result >= 5) {
+        let rollHope = await new Roll('1df').evaluate({ async: true });
+        if (rollHope.terms[0].results[0].result >= 1) {
             successes += 1;
         }
 
