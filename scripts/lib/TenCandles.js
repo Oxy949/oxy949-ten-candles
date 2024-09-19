@@ -167,7 +167,7 @@ export class TenCandles {
     }
 
     // Функция для включения/выключения свечи или чаши
-    async function toggleLight(candleId, lightIds, isBowl = false, desiredStatus = 'toggle') {
+    async function toggleLight(candleId, objIds, isBowl = false, desiredStatus = 'toggle') {
       // Получаем текущее состояние света
       let currentLightStatus = game.candles.isCandleLit(candleId);
       let targetLightStatus;
@@ -214,7 +214,8 @@ export class TenCandles {
       }
 
       // Обновляем состояние свечей и текст с количеством свечей
-      canvas.lighting.updateAll({ hidden: !targetLightStatus }, light => lightIds.includes(light.id));
+      canvas.lighting.updateAll({ hidden: !targetLightStatus }, light => objIds.includes(light.id));
+      canvas.tiles.updateAll({ hidden: !targetLightStatus }, tile => objIds.includes(tile.id));
     }
     
     // Определяем, какой объект (свечу или чашу) нужно обработать
