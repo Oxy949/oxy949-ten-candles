@@ -102,6 +102,7 @@
       {
         "id": "foundryvtt-show-me-the-roll",
         "type": "module",
+        "manifest": "https://github.com/Oxy949/foundryvtt-show-me-the-roll/releases/latest/download/module.json",
         "compatibility": {}
       }
     ]
