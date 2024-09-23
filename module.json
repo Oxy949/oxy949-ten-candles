@@ -104,6 +104,12 @@
         "type": "module",
         "manifest": "https://github.com/Oxy949/foundryvtt-show-me-the-roll/releases/latest/download/module.json",
         "compatibility": {}
+      },
+      {
+        "id": "oxy949-ten-candles-dicetheme",
+        "type": "module",
+        "manifest": "https://github.com/Oxy949/oxy949-ten-candles-dicetheme/releases/latest/download/module.json",
+        "compatibility": {}
       }
     ]
   }
