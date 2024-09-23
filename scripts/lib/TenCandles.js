@@ -207,6 +207,7 @@ export class TenCandles {
         let checkCandleExtinguish = game.settings.get('oxy949-ten-candles', 'checkCandleExtinguish');
 
         Hooks.callAll("oxy949-ten-candles.lit", candleId);
+        Hooks.callAll("oxy949-ten-candles.lit." + candleId);
         // Воспроизведение звука для чаши и свечей
         if (isBowl) {
           game.candles.startTimer(candleId, bowlBurnTime, bowlBurnTime, 1);
@@ -220,11 +221,13 @@ export class TenCandles {
         // Воспроизведение звука только для свечей
         if (!isBowl) {
           Hooks.callAll("oxy949-ten-candles.done", candleId);
+          Hooks.callAll("oxy949-ten-candles.done." + candleId);
           const randomPitch = Math.random() * (1.0 - 0.5) + 0.5;
           playAudio(game.settings.get('oxy949-ten-candles', 'audioPathCandleBlow'), randomPitch);
         }
         else{
           Hooks.callAll("oxy949-ten-candles.done", "bowl");
+          Hooks.callAll("oxy949-ten-candles.done.bowl");
         }
       }
 
