@@ -229,8 +229,13 @@ export class TenCandles {
       }
 
       // Обновляем состояние свечей и текст с количеством свечей
-      canvas.lighting.updateAll({ hidden: !targetLightStatus }, light => objIds.includes(light.id));
-      canvas.tiles.updateAll({ hidden: !targetLightStatus }, tile => objIds.includes(tile.id));
+      await canvas.lighting.updateAll({ hidden: !targetLightStatus }, light => objIds.includes(light.id));
+      await canvas.tiles.updateAll({ hidden: !targetLightStatus }, tile => objIds.includes(tile.id));
+
+      
+      let updateSceneDarkness = game.settings.get('oxy949-ten-candles', 'updateSceneDarkness');
+      if (updateSceneDarkness)
+        game.candles.updateDarkness();
     }
     
     // Определяем, какой объект (свечу или чашу) нужно обработать
@@ -329,14 +334,14 @@ export class TenCandles {
 
   static async removePlayerDice(count = 1) {
     let playerDiceCountId = game.candles.playerDiceCountTextUUID;
-    let gmDiceCountId = game.candles.gmDiceCountTextUUID;
+    //let gmDiceCountId = game.candles.gmDiceCountTextUUID;
 
     let playerDiceCountDrawing = canvas.drawings.placeables[canvas.drawings.placeables.findIndex(drawing => drawing.id === playerDiceCountId)];
     let playerDiceCount = parseInt(playerDiceCountDrawing.document.text);
-    let gmDiceCountDrawing = canvas.drawings.placeables[canvas.drawings.placeables.findIndex(drawing => drawing.id === gmDiceCountId)];
-    let gmDiceCount = parseInt(gmDiceCountDrawing.document.text);
+    //let gmDiceCountDrawing = canvas.drawings.placeables[canvas.drawings.placeables.findIndex(drawing => drawing.id === gmDiceCountId)];
+    //let gmDiceCount = parseInt(gmDiceCountDrawing.document.text);
     canvas.drawings.updateAll({text: playerDiceCount-count}, (drawing => (drawing.id === playerDiceCountId)));
-    canvas.drawings.updateAll({text: gmDiceCount+count}, (drawing => (drawing.id === gmDiceCountId)));
+    //canvas.drawings.updateAll({text: gmDiceCount+count}, (drawing => (drawing.id === gmDiceCountId)));
   }
   
   static async resetPlayerDice() {
@@ -352,5 +357,15 @@ export class TenCandles {
 
     canvas.drawings.updateAll({text: candleCount}, (drawing => (drawing.id === playerDiceCountId)));
     canvas.drawings.updateAll({text: (10-candleCount)}, (drawing => (drawing.id === gmDiceCountId)));
+  }
+
+  static async updateDarkness() {
+    let activeCandlesCount = game.candles.countLitCandles();
+    let totalCandlesCound = 10;
+    const darkness = 0.5 + ((10-activeCandlesCount)/totalCandlesCound * 0.5);
+    const weather = "";
+
+    let scene = fromUuidSync(game.candles.candlesSceneUUID); // замените sceneUUID на ваш фактический UUID
+    await scene.update({darkness, weather});
   }
 }  

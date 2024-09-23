@@ -201,6 +201,16 @@ export const registerSettings = function() {
 		default: 'RollTable.rEQuJVcuEaKpZvE5' // Укажи путь по умолчанию
 	  });
 
+	game.settings.register("modulename", "updateSceneDarkness", {
+		name: "Change Scene Darkness",
+		hint: "Update scene darkness level from 0.5 to 1",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: false,
+		requiresReload: true
+	});
+
 	/*
 	// Регистрация настройки для массива свечей
 	game.settings.register(modulename, 'candlesArray', {
