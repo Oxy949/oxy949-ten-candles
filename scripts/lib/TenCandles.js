@@ -91,11 +91,6 @@ export class TenCandles {
           }
         }
       }
-
-      const status = SimpleCalendar.api.clockStatus();
-      if (!status.started) {
-        SimpleCalendar.api.startClock();
-      }
       
       // Повторный вызов функции
       let timerIDtemp = abouttime.doIn({ second: checkEverySecTemp }, checkTime, candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp);
@@ -200,7 +195,6 @@ export class TenCandles {
 
       // Если требуется включить свет
       if (targetLightStatus) {
-
         if (game.candles.getCandleTimer(candleId) !== ""){
           abouttime.clearTimeout(game.candles.getCandleTimer(candleId));
           game.candles.resetCandleTimer(candleId);
@@ -215,7 +209,7 @@ export class TenCandles {
         Hooks.callAll("oxy949-ten-candles.lit." + candleId);
         // Воспроизведение звука для чаши и свечей
         if (isBowl) {
-          game.candles.startTimer(candleId, bowlBurnTime, bowlBurnTime, 1);
+          game.candles.startTimer(candleId, bowlBurnTime, bowlBurnTime, 5);
           playAudio(game.settings.get('oxy949-ten-candles', 'audioPathBurnPaper'), 1.0);
         } else {
           game.candles.startTimer(candleId, minCandleBurnTime, maxCandleBurnTime, checkCandleExtinguish);
