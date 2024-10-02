@@ -38,7 +38,10 @@ Hooks.once('setup', function () {
         isCandlesScene: TenCandles.isCandlesScene,
         removePlayerDice: TenCandles.removePlayerDice,
         resetPlayerDice: TenCandles.resetPlayerDice,
-        updateDarkness: TenCandles.updateDarkness
+        updateDarkness: TenCandles.updateDarkness,
+        getCandleTimer: TenCandles.getCandleTimer,
+        resetCandleTimer: TenCandles.resetCandleTimer,
+        saveCandleTimer: TenCandles.saveCandleTimer
       };
 
       //@ts-ignore

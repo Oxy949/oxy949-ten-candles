@@ -211,26 +211,11 @@ export const registerSettings = function() {
 		requiresReload: true
 	});
 
-	/*
-	// Регистрация настройки для массива свечей
-	game.settings.register(modulename, 'candlesArray', {
-		name: 'Candles Lights',
-		hint: 'Enter arrays of lights identifiers for each candle.',
-		scope: 'world',
-		config: false,
-		type: Array,
-		default: [
-		  ["XUPTh4rT6iM2IH6h", "CbFMbnPk12K7ZPWU"],
-		  ["6YE9S50sHciN2HHj", "43U9wUydN9rf5y9v"],
-		  ["4LtRBthYK3Yv0PoX", "KKs6jupYdEWpdWEt"],
-		  ["9zJEqE3IfGpmfYPA", "SzFybV75900CVteF"],
-		  ["RnuJBSyPKfoxMV9u", "0XAQ42ZGrYz2HuUT"],
-		  ["Gcl9vsbwXZT2Kayh", "daF9FaAXm4nhfOzp"],
-		  ["MtLp5ZerEWBPkL2A", "JOCACVmAPgi946PQ"],
-		  ["5qy3z9XGOqs1C8aN", "WkIZ6io8z8XBiZE5"],
-		  ["XMxZRti0ZH7nM1T8", "KMXOFV1GwHpC2rmg"],
-		  ["ADIgSBglENlsWljJ", "PP6XWuSLiXw3jhOw"]
-		]
-	});
-	*/
+	game.settings.register(modulename, "candleTimers", {
+        name: "Candle Timers",
+        scope: "world",
+        config: false,  // Не показывать в интерфейсе настроек
+        type: Object, 
+        default: {}
+    });
 }

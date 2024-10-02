@@ -100,7 +100,8 @@ export class TenCandles {
         SimpleCalendar.api.startClock();
       }
       // Повторный вызов функции
-      abouttime.doIn({ second: checkEverySecTemp }, checkTime, candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp);
+      let timerIDtemp = abouttime.doIn({ second: checkEverySecTemp }, checkTime, candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp);
+      game.candles.saveCandleTimer(candleIdTemp, timerIDtemp);
     }
 
     // Устанавливаем начальное время
@@ -114,7 +115,8 @@ export class TenCandles {
        }
        SimpleCalendar.api.startClock();
     }
-    abouttime.doIn({ second: checkEverySec }, checkTime, candleId, startTime, minBurnTime, maxBurnTime, checkEverySec);
+    let timerID = abouttime.doIn({ second: checkEverySec }, checkTime, candleId, startTime, minBurnTime, maxBurnTime, checkEverySec);
+    game.candles.saveCandleTimer(candleId, timerID);
   }
 
   static isCandlesScene() {
@@ -229,6 +231,8 @@ export class TenCandles {
           Hooks.callAll("oxy949-ten-candles.done", "bowl");
           Hooks.callAll("oxy949-ten-candles.done.bowl");
         }
+        game.candles.resetCandleTimer(candleId);
+        
       }
 
       // Обновляем состояние свечей и текст с количеством свечей
@@ -247,6 +251,29 @@ export class TenCandles {
     } else {
       toggleLight("bowl", game.candles.bowlUUIDs, true, desiredState);
     }
+  }
+
+  static getCandleTimer(candleId) {
+    let candleTimers = game.settings.get("oxy949-ten-candles", "candleTimers");
+    return candleTimers[candleId];
+  }
+
+  static resetCandleTimer(candleId) {
+    let timerID = game.candles.getCandleTimer(candleId);
+    if (timerID !== "")
+    {
+      abouttime.clearTimeout(timerID);
+      game.candles.saveCandleTimer(candleId, "")
+    }
+  }
+
+  static async saveCandleTimer(candleId, timerId) {
+    // Получаем текущие данные из настроек
+    let candleTimers = game.settings.get("oxy949-ten-candles", "candleTimers");
+    // Добавляем новую свечу и таймер
+    candleTimers[candleId] = timerId;
+    // Сохраняем обновленные данные
+    await game.settings.set("oxy949-ten-candles", "candleTimers", candleTimers);
   }
 
   static async roll(player, withHope) {
