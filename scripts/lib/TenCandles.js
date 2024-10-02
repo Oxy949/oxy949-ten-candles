@@ -203,6 +203,11 @@ export class TenCandles {
       // Если требуется включить свет
       if (targetLightStatus) {
 
+        if (game.candles.getCandleTimer(candleId) !== ""){
+          abouttime.clearTimeout(game.candles.getCandleTimer(candleId));
+          game.candles.resetCandleTimer(candleId);
+        }
+
         let minCandleBurnTime = game.settings.get('oxy949-ten-candles', 'minCandleBurnTime');
         let maxCandleBurnTime = game.settings.get('oxy949-ten-candles', 'maxCandleBurnTime');
         let bowlBurnTime = game.settings.get('oxy949-ten-candles', 'bowlBurnTime');
@@ -232,7 +237,6 @@ export class TenCandles {
           Hooks.callAll("oxy949-ten-candles.done.bowl");
         }
         game.candles.resetCandleTimer(candleId);
-        
       }
 
       // Обновляем состояние свечей и текст с количеством свечей
@@ -255,7 +259,7 @@ export class TenCandles {
 
   static getCandleTimer(candleId) {
     let candleTimers = game.settings.get("oxy949-ten-candles", "candleTimers");
-    return candleTimers[candleId];
+    return candleTimers[candleId] || "";
   }
 
   static resetCandleTimer(candleId) {
