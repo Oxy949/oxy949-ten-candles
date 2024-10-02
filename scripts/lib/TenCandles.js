@@ -54,7 +54,7 @@ export class TenCandles {
     console.log(`Свеча будет гореть в течение [${minBurnTime}-${maxBurnTime}] секунд.`);
 
     // Определяем функцию checkTime
-    async function checkTime(candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp) {
+    function checkTime(candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp) {
       let timeElapsed = (Date.now() - startedTime) / 1000; // Время в секундах
 
       if (game.candles.isCandlesScene())
@@ -94,11 +94,9 @@ export class TenCandles {
 
       const status = SimpleCalendar.api.clockStatus();
       if (!status.started) {
-        await SimpleCalendar.api.startClock();
+        SimpleCalendar.api.startClock();
       }
-      if (game.paused) {
-        game.togglePause();
-      }
+      
       // Повторный вызов функции
       let timerIDtemp = abouttime.doIn({ second: checkEverySecTemp }, checkTime, candleIdTemp, startedTime, burnMinTime, burnFinalTime, checkEverySecTemp);
       game.candles.saveCandleTimer(candleIdTemp, timerIDtemp);
