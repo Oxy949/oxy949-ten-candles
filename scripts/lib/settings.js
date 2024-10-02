@@ -211,6 +211,16 @@ export const registerSettings = function() {
 		requiresReload: true
 	});
 
+	game.settings.register(modulename, "resetDiceOnCandleInteraction", {
+		name: "Reset Dice Count on Candle Interaction",
+		hint: "Calc player/gm dice",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: true,
+		requiresReload: true
+	});
+
 	game.settings.register(modulename, "candleTimers", {
         name: "Candle Timers",
         scope: "world",

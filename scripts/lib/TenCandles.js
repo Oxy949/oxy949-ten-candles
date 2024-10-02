@@ -239,6 +239,10 @@ export class TenCandles {
       let updateSceneDarkness = game.settings.get('oxy949-ten-candles', 'updateSceneDarkness');
       if (updateSceneDarkness)
         game.candles.updateDarkness();
+      
+      let updateDice = game.settings.get('oxy949-ten-candles', 'resetDiceOnCandleInteraction');
+      if (!isBowl && updateDice)
+        game.candles.resetPlayerDice();
     }
     
     // Определяем, какой объект (свечу или чашу) нужно обработать
