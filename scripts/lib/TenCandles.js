@@ -93,7 +93,7 @@ export class TenCandles {
       }
 
       const status = SimpleCalendar.api.clockStatus();
-      if (!status.started) {
+      if (!status.started || status.paused) {
         if (game.paused) {
           game.togglePause();
         }
